@@ -106,6 +106,7 @@ class MenuBar(PolychromaticBase):
         # -- View
         _set_icon("actionDevices", "general", "devices")
         _set_icon("actionEffects", "general", "effects")
+        _set_icon("actionLaptop", "general", "laptop")
         _set_icon("actionPresets", "general", "presets")
         _set_icon("actionTriggers", "general", "triggers")
         _set_icon("actionReinstateMenuBar", "general", "pin")

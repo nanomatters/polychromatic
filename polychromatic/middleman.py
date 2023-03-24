@@ -58,7 +58,6 @@ class Middleman(object):
         is ready. Note that this thread may potentially be blocked if the backend
         hangs while it initialises.
         """
-        # Just OpenRazer for now.
         try:
             import polychromatic.backends.openrazer as openrazer_backend
             backend = openrazer_backend.OpenRazerBackend(self._base)
@@ -70,6 +69,18 @@ class Middleman(object):
             self.not_installed.append("openrazer")
         except Exception as e:
             self.import_errors["openrazer"] = common.get_exception_as_string(e)
+
+        try:
+            import polychromatic.backends.undervolt as undervolt_backend
+            backend = undervolt_backend.UndervoltBackend(self._base)
+            if backend.init():
+                self.backends.append(backend)
+            else:
+                self.bad_init.append(backend)
+        except (ImportError, ModuleNotFoundError):
+            self.not_installed.append("undervolt")
+        except Exception as e:
+            self.import_errors["undervolt"] = common.get_exception_as_string(e)
 
         try:
             self.troubleshooters["openrazer"] = TROUBLESHOOT_MODULES["openrazer"]

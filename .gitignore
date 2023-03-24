@@ -5,6 +5,7 @@ __pycache__
 
 # Temporary
 data/qt/*.h
+data/qt/ui_main.py
 locale/tmp/
 
 # Compiled

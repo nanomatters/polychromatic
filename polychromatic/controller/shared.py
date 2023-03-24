@@ -557,7 +557,27 @@ class PolychromaticWidgets(PolychromaticBase):
         group.layout().setContentsMargins(QMargins(0, 6, 0, 6))
         return group
 
-    def create_row_widget(self, label_text, widgets=[], vertical=False, wrap=False):
+    def create_group(self, title, widgets=[], vertical=False, wrap=False):
+        """
+        Returns a group widget containing controls for a specific device zone.
+
+        Params:
+            title           (str)   Group title
+
+        Returns: QGroupBox()
+        """
+        group = QGroupBox()
+        group.setTitle(title)
+        group.setLayout(QHBoxLayout())
+        group.layout().setAlignment(Qt.AlignTop)
+        group.layout().setContentsMargins(QMargins(0, 6, 0, 6))
+
+        for w in widgets:
+            group.layout().addWidget(w)
+
+        return group
+
+    def create_row_widget(self, label_text, widgets=[], vertical=False, wrap=False, labelOffset=150):
         """
         Returns a widget for use when presenting controls for a particular option.
 
@@ -579,8 +599,8 @@ class PolychromaticWidgets(PolychromaticBase):
         label.setText(label_text)
         label.setAlignment(Qt.AlignTop)
         label.setWordWrap(True)
-        label.setMinimumWidth(120)
-        label.setMaximumWidth(120)
+        label.setMinimumWidth(labelOffset)
+        label.setMaximumWidth(130)
 
         # Right - Add controls
         inner_widget = QWidget()
